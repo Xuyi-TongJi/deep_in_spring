@@ -2,8 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-<bean id="bean1" class="edu.seu.deep_in_spring.testApplicationContext.Bean1"/>
-<bean id="bean2" class="edu.seu.deep_in_spring.testApplicationContext.Bean2">
+<bean id="bean1" class="edu.seu.deep_in_spring.applicationcontext.Bean1"/>
+<bean id="bean2" class="edu.seu.deep_in_spring.applicationcontext.Bean2">
     <property name="bean1" ref="bean1"/>
 </bean>
 </beans>

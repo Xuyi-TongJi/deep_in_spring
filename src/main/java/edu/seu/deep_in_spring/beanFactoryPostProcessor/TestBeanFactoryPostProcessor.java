@@ -26,11 +26,11 @@ public class TestBeanFactoryPostProcessor {
         //testMyBeanFactoryPostProcessor();
         //testBeanPostProcessor();
         //testMapperScanPostProcessor();
-        testMapperScanPostProcessor();
+        testMyMapperScanPostProcessor();
     }
 
     /**
-     * 测试常用的后处理器
+     * 测试常用的Bean工厂后处理器
      */
     private static void basicTest() {
         // build an applicationContext
@@ -196,6 +196,7 @@ public class TestBeanFactoryPostProcessor {
         GenericApplicationContext context = new GenericApplicationContext();
         context.registerBean("config", Config.class);
         // 加入自定义的Bean工厂后处理器
+        context.registerBean(AtBeanFactoryPostProcessor.class);
         context.registerBean(MapperPostScanPostProcessor.class);
         context.refresh();
         for (String name : context.getBeanDefinitionNames()) {

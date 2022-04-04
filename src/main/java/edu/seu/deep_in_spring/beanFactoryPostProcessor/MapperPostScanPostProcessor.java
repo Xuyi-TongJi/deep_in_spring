@@ -1,7 +1,7 @@
 package edu.seu.deep_in_spring.beanFactoryPostProcessor;
 
-import edu.seu.deep_in_spring.beanFactoryPostProcessor.component.Mapper1;
 import lombok.SneakyThrows;
+import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -31,8 +31,8 @@ public class MapperPostScanPostProcessor implements BeanDefinitionRegistryPostPr
             MetadataReader reader = factory.getMetadataReader(resource);
             ClassMetadata classMetadata = reader.getClassMetadata();
             AnnotationBeanNameGenerator generator = new AnnotationBeanNameGenerator();
-            // Mapper一定是接口
-            if (classMetadata.isInterface()) {
+            // Mapper一定是接口 且 该接口必须含有@Mapper注解，才会被解析并加入BeanFactory
+            if (classMetadata.isInterface() && reader.getAnnotationMetadata().hasAnnotation(Mapper.class.getName())) {
                 // 被Spring管理的类（Bean）是Mapper工厂
                 AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(MapperFactoryBean.class)
                         // MapperFactoryBean<Mapper1>

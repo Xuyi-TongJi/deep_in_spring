@@ -1,4 +1,4 @@
-package edu.seu.deep_in_spring.testApplicationContext;
+package edu.seu.deep_in_spring.applicationcontext;
 
 import lombok.Data;
 
