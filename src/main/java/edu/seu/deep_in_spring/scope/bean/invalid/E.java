@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
  * 三种实现单例(E)注入prototype(F,F2,F3)的方法：
  * 注入代理对象，注入工厂对象或者直接注入ApplicationContext容器
  * 建议使用后二者
+ *
+ * 解决理念：注入阶段(@Autowired)依旧注入单例对象，推迟真正注入的prototype Bean的获取
  */
 @Component
 public class E {
