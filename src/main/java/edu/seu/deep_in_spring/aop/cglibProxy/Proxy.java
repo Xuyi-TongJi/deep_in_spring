@@ -1,10 +1,9 @@
 package edu.seu.deep_in_spring.aop.cglibProxy;
 
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
+import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
 
 public class Proxy extends Target{
 
@@ -29,7 +28,7 @@ public class Proxy extends Target{
             // arg1 & arg2 目标和代理对象 arg3 参数 ()代表无参 I代表int J代表long V表示返回值为void[字节码文件规则] save 和 saveSuper分别是Proxy.class中带增强功能的方法和原始方法名
             save0Proxy = MethodProxy.create(Target.class, Proxy.class, "()V", "save", "saveSuper");
             save1Proxy = MethodProxy.create(Target.class, Proxy.class, "(I)V", "save", "saveSuper");
-            save1Proxy = MethodProxy.create(Target.class, Proxy.class, "(J)V", "save", "saveSuper");
+            save2Proxy = MethodProxy.create(Target.class, Proxy.class, "(J)V", "save", "saveSuper");
 
         } catch (NoSuchMethodException e) {
             throw new NoSuchMethodError();
@@ -45,7 +44,7 @@ public class Proxy extends Target{
             /*
                 methodInterceptor.intercept方法参数：执行方法的对象[this], 待增强的方法Method对象，方法参数, methodProxy逻辑
              */
-            methodInterceptor.intercept(this, save0, new Object[0], null);
+            methodInterceptor.intercept(this, save0, new Object[0], save0Proxy);
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -55,7 +54,7 @@ public class Proxy extends Target{
     @Override
     public void save(int i) {
         try {
-            methodInterceptor.intercept(this, save1, new Object[]{i}, null);
+            methodInterceptor.intercept(this, save1, new Object[]{i}, save1Proxy);
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -64,7 +63,7 @@ public class Proxy extends Target{
     @Override
     public void save(long l) {
         try {
-            methodInterceptor.intercept(this, save2, new Object[]{l}, null);
+            methodInterceptor.intercept(this, save2, new Object[]{l}, save2Proxy);
         } catch (Throwable e) {
             e.printStackTrace();
         }
