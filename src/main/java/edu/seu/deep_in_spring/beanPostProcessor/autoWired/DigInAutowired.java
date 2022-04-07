@@ -15,6 +15,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * Autowired注解底层原理：通过反射给属性赋值。发生时间：类的实例化后，SpringBean的初始化前
+ */
 public class DigInAutowired {
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();

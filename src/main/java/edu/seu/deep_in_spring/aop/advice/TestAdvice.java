@@ -1,10 +1,13 @@
 package edu.seu.deep_in_spring.aop.advice;
 
+import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.*;
 import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.framework.ReflectiveMethodInvocation;
+import org.springframework.aop.interceptor.ExposeInvocationInterceptor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 
 import java.lang.reflect.Method;
@@ -65,7 +68,7 @@ public class TestAdvice {
     /**
      * 解析不同的通知类型并将其转换为环绕通知
      */
-    private static void testAdvisorTransfer() throws NoSuchMethodException {
+    private static void testAdvisorTransfer() throws Throwable {
         // 最终创建的切面集合
         List<Advisor> list = new ArrayList<>();
 
@@ -122,12 +125,23 @@ public class TestAdvice {
         for (Object o : lists) {
             System.out.println(o);
         }
+
+        Target target = new Target();
+        // Spring在执行调用链前，会在代理工厂中加入ExposeInvocationInterceptor.INSTANCE[ADVICE] ，该通知可以将MethodInvocation放入当前线程，以便其他通知使用
+        proxyFactory.addAdvice(ExposeInvocationInterceptor.INSTANCE);
+        /*
+            模拟执行调用链 -> ReflectiveMethodInvocation构造方法被保护，因此无法实例化
+            MethodInvocation methodInvocation = new ReflectiveMethodInvocation(
+                null, target, Target.class.getMethod("foo"), new Object[0], Target.class, lists
+            );
+            methodInvocation.proceed();
+        */
     }
 
     public static void main(String[] args) {
         try {
             testAdvisorTransfer();
-        } catch (NoSuchMethodException e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
     }
