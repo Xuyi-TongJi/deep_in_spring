@@ -91,12 +91,12 @@ public class TestApplicationContext {
             return bean2;
         }
     }
-
     /**
      * 基于web的配置类
      * 必须要有：ServletWebServerFactory, DispatcherServlet 并把后者注册到前者(DispatcherServletRegistrationBean)
      * [内嵌tomcat服务器的工作原理]
      */
+
     @Configuration
     static class WebConfig {
 

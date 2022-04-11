@@ -1,5 +1,6 @@
-package edu.seu.deep_in_spring_mvc.requestMappingHandlerMapping;
+package edu.seu.deep_in_spring_mvc.requestMappingHandlerMappingAdapter;
 
+import edu.seu.deep_in_spring_mvc.requestMappingHandlerMappingAdapter.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class MyController {
     }
 
     @PutMapping("/test3")
-    public ModelAndView test3(@RequestBody String token) {
+    public ModelAndView test3(@Token String token) {
         log.debug("test3({})", token);
         return null;
     }
@@ -32,5 +33,12 @@ public class MyController {
     public ModelAndView test4() {
         log.debug("test4()");
         return null;
+    }
+
+    @RequestMapping("/test5")
+    //@ResponseBody
+    @Yml
+    public User getUser() {
+        return new User(1, "xuyi");
     }
 }

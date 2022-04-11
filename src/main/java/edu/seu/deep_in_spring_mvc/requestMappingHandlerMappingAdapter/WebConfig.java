@@ -1,4 +1,4 @@
-package edu.seu.deep_in_spring_mvc.requestMappingHandlerMapping;
+package edu.seu.deep_in_spring_mvc.requestMappingHandlerMappingAdapter;
 
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletRegistrationBean;
@@ -10,7 +10,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
+import java.util.Collections;
 
 /**
  * 内嵌web容器的ApplicationContext必须有：内嵌的web容器工厂、DispatcherServlet以及SpringMVC入口[DispatcherServlet注册]
@@ -67,10 +70,15 @@ public class WebConfig {
     }
 
     /**
-     * 测试RequsetMappingHandlerAdapter
+     * 测试RequestMappingHandlerAdapter及其自定义组件
      */
     @Bean
     public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
-        return new RequestMappingHandlerAdapter();
+        RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+        // 加入自定义返回值解析器
+        adapter.setCustomReturnValueHandlers(Collections.singletonList(new YmlReturnValueHandler()));
+        // 加入自定义参数解析器
+        adapter.setCustomArgumentResolvers(Collections.singletonList(new TokenArgumentResolver()));
+        return adapter;
     }
 }

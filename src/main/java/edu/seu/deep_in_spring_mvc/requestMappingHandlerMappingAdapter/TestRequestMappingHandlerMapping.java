@@ -1,4 +1,4 @@
-package edu.seu.deep_in_spring_mvc.requestMappingHandlerMapping;
+package edu.seu.deep_in_spring_mvc.requestMappingHandlerMappingAdapter;
 
 import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
