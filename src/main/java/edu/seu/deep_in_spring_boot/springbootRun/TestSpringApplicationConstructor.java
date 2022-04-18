@@ -20,7 +20,6 @@ import java.lang.reflect.Method;
  * SpringApplication构造分析
  * SpringApplication.run()方法
  */
-@SpringBootApplication
 public class TestSpringApplicationConstructor {
     public static void main(String[] args) throws Exception {
         // ConfigurableApplicationContext run = SpringApplication.run(TestSpringApplicationRun.class);
