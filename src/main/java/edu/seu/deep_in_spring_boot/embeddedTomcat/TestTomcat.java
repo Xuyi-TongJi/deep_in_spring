@@ -1,4 +1,4 @@
-package edu.seu.deep_in_spring_boot.tomcat;
+package edu.seu.deep_in_spring_boot.embeddedTomcat;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;

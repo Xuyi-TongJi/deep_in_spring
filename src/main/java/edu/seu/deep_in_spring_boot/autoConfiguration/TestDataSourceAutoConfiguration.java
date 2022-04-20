@@ -85,12 +85,11 @@ public class TestDataSourceAutoConfiguration {
             return new String[]{
                     // 如果不进行任何配置，将默认注入Hikari DataSource Bean到spring容器中
                     DataSourceAutoConfiguration.class.getName(),
-
                     // 最终导入三个组件[SqlSessionFactory, SqlSessionTemplate, AutoConfiguredMapperScannerRegistrar]
                     MybatisAutoConfiguration.class.getName(),
                     // 基于DataSource的事务管理器 -> 提交回滚事物
                     DataSourceTransactionManagerAutoConfiguration.class.getName(),
-                    // 提供声明式的事务管理 -> 事物切面，事物切点，事物通知[@Transaction]
+                    // 提供声明式的事务管理 -> 事物切面TransactionInterceptor，事物切点TransactionAttributeSource[@Transaction]，事物通知BeanFactoryTransactionAttributeSourceAdvisor
                     TransactionAutoConfiguration.class.getName()
             };
         }

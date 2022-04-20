@@ -1,2 +1,5 @@
 edu.seu.deep_in_spring_boot.autoConfiguration.TestAutoConfiguration$MyImportSelector=\
   edu.seu.deep_in_spring_boot.autoConfiguration.TestAutoConfiguration.AutoConfiguration1
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  edu.seu.deep_in_spring_boot.autoConfiguration.DiyAutoConfiguration.AutoConfiguration1
